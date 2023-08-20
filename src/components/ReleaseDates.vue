@@ -1,24 +1,26 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import LoadingProgess from './LoadingProgress.vue'
+import { useStore } from '../store/store'
+import type { LoadedReleases, Release } from '@/interface'
+import { loadPapers } from '@/store/actions/load-papers'
 
-const items = ref([
-  {
-    title: 'Item #1',
-    value: 1
-  },
-  {
-    title: 'Item #2',
-    value: 2
-  },
-  {
-    title: 'Item #3',
-    value: 3
-  }
-])
+const store = useStore()
+
+function releaseOnClick(release: Release) {
+  store.$patch(loadPapers(release))
+}
 </script>
 
 <template>
   <v-navigation-drawer>
-    <v-list :items="items"></v-list>
+    <LoadingProgess v-if="store.releasesLoading" />
+    <v-list v-else>
+      <v-list-item
+        v-for="(item, index) in (store.releases as LoadedReleases).releases"
+        :key="index"
+      >
+        <v-list-item-title @click="releaseOnClick(item)">{{ item.date }}</v-list-item-title>
+      </v-list-item>
+    </v-list>
   </v-navigation-drawer>
 </template>

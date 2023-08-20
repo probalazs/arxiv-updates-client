@@ -3,8 +3,16 @@ import { ref } from 'vue'
 
 import ReleaseDates from './components/ReleaseDates.vue'
 import WhitePapers from './components/WhitePapers.vue'
+import { onMounted } from 'vue'
+import { init, useStore } from './store'
+
+const store = useStore()
 
 const drawer = ref(true)
+
+onMounted(() => {
+  store.$patch(init)
+})
 </script>
 
 <template>
