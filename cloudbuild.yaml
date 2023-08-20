@@ -1,4 +1,11 @@
 steps:
+  - name: 'hashicorp/terraform:latest'
+    entrypoint: sh
+    args:
+      - '-c'
+      - |
+        terraform -chdir=infrastructure init
+        terraform -chdir=infrastructure apply -auto-approve
   - name: 'node:20'
     script: |
       #!/usr/bin/env bash

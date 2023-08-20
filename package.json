@@ -12,7 +12,10 @@
     "build-only": "vite build --base=/arxiv-updates-static-site/",
     "type-check": "vue-tsc --noEmit -p tsconfig.vitest.json --composite false",
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore",
-    "format": "prettier --write src/"
+    "format": "prettier --write src/",
+    "terraform-init": "docker-compose run --rm terraform init",
+    "terraform-apply": "docker-compose run --rm terraform apply",
+    "terraform-format": "docker-compose run --rm terraform fmt -recursive"
   },
   "dependencies": {
     "fast-xml-parser": "^4.2.7",
