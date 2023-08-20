@@ -1,0 +1,15 @@
+steps:
+  - name: 'node:20'
+    script: |
+      #!/usr/bin/env bash
+      npm ci
+      npm run build
+  - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+    args:
+      - gcloud
+      - storage
+      - rsync
+      - dist
+      - gs://arxiv-updates-static-site
+      - --recursive
+      - --delete-unmatched-destination-objects
