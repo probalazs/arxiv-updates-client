@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { patch } from '@/store'
 import { filterPapers } from '@/store/actions'
 import { toggleReleases } from '@/store/actions/toggle-releases'
 import { useStore } from '@/store/store'
@@ -6,11 +7,11 @@ import { useStore } from '@/store/store'
 const store = useStore()
 
 function searchFieldOnUpdate(value: string) {
-  store.$patch(filterPapers(value))
+  patch(filterPapers(value))
 }
 
 function onMenuClicked() {
-  store.$patch(toggleReleases)
+  patch(toggleReleases)
 }
 </script>
 <template>
