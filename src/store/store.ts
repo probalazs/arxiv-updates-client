@@ -6,6 +6,7 @@ export const useStore = defineStore('app', {
   state: () =>
     ({
       releasesVisible: true,
+      activeReleaseIndex: 0,
       releases: { status: Status.LOADING },
       papers: { status: Status.LOADING },
       papersFilter: '',

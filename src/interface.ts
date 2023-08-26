@@ -1,4 +1,5 @@
 export type State = {
+  activeReleaseIndex: number
   releasesVisible: boolean
   releases: Releases
   papers: Papers

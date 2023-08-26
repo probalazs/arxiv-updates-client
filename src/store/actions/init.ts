@@ -17,6 +17,7 @@ export const init: Init = (state) => {
     .then(getFilReleases)
     .then((releases) => {
       state.releases = { status: Status.SUCCESS, releases }
+      state.activeReleaseIndex = 0
       return releases[0]
     })
     .then((release) =>
