@@ -1,15 +1,19 @@
 import { Status, type State } from '@/interface'
 import { defineStore } from 'pinia'
-import { papersLoading, releasesLoading } from './getters'
+import { filteredPapers, papersLoading, releasesLoading } from './getters'
 
 export const useStore = defineStore('app', {
   state: () =>
     ({
+      releasesVisible: true,
       releases: { status: Status.LOADING },
-      papers: { status: Status.LOADING }
+      papers: { status: Status.LOADING },
+      papersFilter: '',
+      papersFiltering: false
     }) as State,
   getters: {
     releasesLoading,
-    papersLoading
+    papersLoading,
+    filteredPapers
   }
 })

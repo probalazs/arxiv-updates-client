@@ -4,6 +4,7 @@ import { isEmpty } from 'ramda'
 export type LoadPapers = (release: Release) => (state: State) => void
 
 export const loadPapers: LoadPapers = (release) => (state) => {
+  state.papersFilter = ''
   state.papers = { status: Status.LOADING }
   fetch(`https://storage.googleapis.com/arxiv-updates-releases/${release.filename}`)
     .then((response) => response.json())

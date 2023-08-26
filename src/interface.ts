@@ -1,6 +1,9 @@
 export type State = {
+  releasesVisible: boolean
   releases: Releases
   papers: Papers
+  papersFilter: string
+  papersFiltering: boolean
 }
 
 export enum Status {

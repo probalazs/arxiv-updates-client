@@ -12,14 +12,11 @@ const store = useStore()
     <v-row>
       <v-col cols="12">
         <v-alert v-if="(store.papers as LoadedPapers).empty" text="No papers found"></v-alert>
-        <v-alert
-          v-else
-          :text="`Number of papers: ${(store.papers as LoadedPapers).papers.length}`"
-        ></v-alert>
+        <v-alert v-else :text="`Number of papers: ${store.filteredPapers.length}`"></v-alert>
       </v-col>
     </v-row>
     <v-row>
-      <v-col v-for="(paper, index) in (store.papers as LoadedPapers).papers" :key="index" cols="12">
+      <v-col v-for="(paper, index) in store.filteredPapers" :key="index" cols="12">
         <v-card>
           <v-card-title>#{{ index + 1 }} | {{ paper.title }}</v-card-title>
           <v-card-text><span v-html="paper.summary"></span></v-card-text>
