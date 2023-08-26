@@ -33,6 +33,7 @@ export type Paper = {
   title: string
   summary: string
   link: string
+  pdf: string
 }
 
 export type LoadedPapers = {

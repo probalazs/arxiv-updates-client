@@ -8,7 +8,7 @@ import { init, useStore } from './store'
 const store = useStore()
 
 onMounted(() => {
-  store.$patch(init)
+  store.$patch(init((_: any) => store.$patch(_)))
 })
 </script>
 

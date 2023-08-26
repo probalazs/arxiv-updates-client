@@ -21,7 +21,8 @@ const store = useStore()
           <v-card-title>#{{ index + 1 }} | {{ paper.title }}</v-card-title>
           <v-card-text><span v-html="paper.summary"></span></v-card-text>
           <v-card-actions>
-            <v-btn :href="paper.link" target="_blank">Read more</v-btn>
+            <v-btn :href="paper.link" target="_blank">Abstract</v-btn>
+            <v-btn :href="paper.pdf" target="_blank">Pdf</v-btn>
           </v-card-actions>
         </v-card>
       </v-col>

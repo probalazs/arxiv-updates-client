@@ -1,8 +1,9 @@
 import { Status, type State, type Release } from '@/interface'
 import { XMLParser } from 'fast-xml-parser'
-import { isEmpty, map, path, pipe, prop, slice, sort } from 'ramda'
+import { map, path, pipe, prop, slice, sort } from 'ramda'
+import { loadPapers } from '.'
 
-export type Init = (state: State) => void
+export type Init = (patch: Function) => (state: State) => void
 
 type XML = {
   ListBucketResult: {
@@ -10,7 +11,7 @@ type XML = {
   }
 }
 
-export const init: Init = (state) => {
+export const init: Init = (patch: Function) => (state) => {
   fetch('https://storage.googleapis.com/arxiv-updates-releases')
     .then((response) => response.text())
     .then((data) => new XMLParser().parse(data))
@@ -18,18 +19,7 @@ export const init: Init = (state) => {
     .then((releases) => {
       state.releases = { status: Status.SUCCESS, releases }
       state.activeReleaseIndex = 0
-      return releases[0]
-    })
-    .then((release) =>
-      fetch(`https://storage.googleapis.com/arxiv-updates-releases/${release.filename}`)
-    )
-    .then((response) => response.json())
-    .then((data) => {
-      state.papers = {
-        status: Status.SUCCESS,
-        papers: data.papers,
-        empty: isEmpty(data.papers)
-      }
+      patch(loadPapers(releases[0]))
     })
 }
 
