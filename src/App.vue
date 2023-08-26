@@ -4,11 +4,12 @@ import WhitePapers from './components/WhitePapers.vue'
 import TopBar from './components/TopBar.vue'
 import { onMounted } from 'vue'
 import { init, useStore } from './store'
+import { patch } from './store'
 
 const store = useStore()
 
 onMounted(() => {
-  store.$patch(init((_: any) => store.$patch(_)))
+  patch(init)
 })
 </script>
 

@@ -1,7 +1,9 @@
-import { type State } from '@/interface'
+import { type Action } from '@/interface'
 
-export type SetActiveReleaseIndex = (releaseIndex: number) => (state: State) => void
+export type SetActiveReleaseIndex = (releaseIndex: number) => Action
 
-export const setActiveReleaseIndex: SetActiveReleaseIndex = (releaseIndex) => (state) => {
-  state.activeReleaseIndex = releaseIndex
-}
+export const setActiveReleaseIndex: SetActiveReleaseIndex =
+  (releaseIndex) =>
+  ({ state }) => {
+    state.activeReleaseIndex = releaseIndex
+  }

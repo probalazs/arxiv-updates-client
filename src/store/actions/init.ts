@@ -1,9 +1,9 @@
-import { Status, type State, type Release } from '@/interface'
+import { Status, type Release, type Action } from '@/interface'
 import { XMLParser } from 'fast-xml-parser'
 import { map, path, pipe, prop, slice, sort } from 'ramda'
 import { loadPapers } from '.'
 
-export type Init = (patch: Function) => (state: State) => void
+export type Init = Action
 
 type XML = {
   ListBucketResult: {
@@ -11,7 +11,7 @@ type XML = {
   }
 }
 
-export const init: Init = (patch: Function) => (state) => {
+export const init: Init = ({ patch, state }) => {
   fetch('https://storage.googleapis.com/arxiv-updates-releases')
     .then((response) => response.text())
     .then((data) => new XMLParser().parse(data))

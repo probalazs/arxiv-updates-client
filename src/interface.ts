@@ -1,3 +1,5 @@
+import type { Patch } from './store/patch'
+
 export type State = {
   activeReleaseIndex: number
   releasesVisible: boolean
@@ -47,3 +49,10 @@ export type LoadingPapers = {
 }
 
 export type Papers = LoadedPapers | LoadingPapers
+
+export type PatchHelpers = {
+  patch: Patch
+  state: State
+}
+
+export type Action = (helper: PatchHelpers) => void

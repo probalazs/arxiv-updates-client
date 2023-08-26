@@ -4,12 +4,13 @@ import { useStore } from '../store/store'
 import type { LoadedReleases, Release } from '@/interface'
 import { loadPapers } from '@/store/actions/load-papers'
 import { setActiveReleaseIndex } from '@/store/actions'
+import { patch } from '@/store'
 
 const store = useStore()
 
 function releaseOnClick(release: Release, releaseIndex: number) {
-  store.$patch(loadPapers(release))
-  store.$patch(setActiveReleaseIndex(releaseIndex))
+  patch(loadPapers(release))
+  patch(setActiveReleaseIndex(releaseIndex))
 }
 </script>
 

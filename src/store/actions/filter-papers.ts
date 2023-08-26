@@ -1,7 +1,9 @@
-import { type State } from '@/interface'
+import { type Action } from '@/interface'
 
-export type FilterPapers = (paperFilter: string) => (state: State) => void
+export type FilterPapers = (paperFilter: string) => Action
 
-export const filterPapers: FilterPapers = (paperFilter) => (state) => {
-  state.papersFilter = paperFilter
-}
+export const filterPapers: FilterPapers =
+  (paperFilter) =>
+  ({ state }) => {
+    state.papersFilter = paperFilter
+  }

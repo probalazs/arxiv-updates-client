@@ -1,22 +1,24 @@
-import { Status, type State, type Release, type Paper } from '@/interface'
+import { Status, type Release, type Paper, type Action } from '@/interface'
 import { isEmpty, map, replace } from 'ramda'
 
-export type LoadPapers = (release: Release) => (state: State) => void
+export type LoadPapers = (release: Release) => Action
 
-export const loadPapers: LoadPapers = (release) => (state) => {
-  state.papersFilter = ''
-  state.papers = { status: Status.LOADING }
-  fetch(`https://storage.googleapis.com/arxiv-updates-releases/${release.filename}`)
-    .then((response) => response.json())
-    .then(getPapers)
-    .then((papers) => {
-      state.papers = {
-        status: Status.SUCCESS,
-        papers,
-        empty: isEmpty(papers)
-      }
-    })
-}
+export const loadPapers: LoadPapers =
+  (release) =>
+  ({ state }) => {
+    state.papersFilter = ''
+    state.papers = { status: Status.LOADING }
+    fetch(`https://storage.googleapis.com/arxiv-updates-releases/${release.filename}`)
+      .then((response) => response.json())
+      .then(getPapers)
+      .then((papers) => {
+        state.papers = {
+          status: Status.SUCCESS,
+          papers,
+          empty: isEmpty(papers)
+        }
+      })
+  }
 
 function getPapers(respone: any): Paper[] {
   return map(
